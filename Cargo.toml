@@ -1,0 +1,16 @@
+[package]
+name = "pcx-rle"
+version = "0.1.0"
+edition = "2024"
+
+[features]
+# The bugs, one at a time, for the article.
+bug-escape = []
+bug-cap = []
+bug-unchecked = []
+
+[dev-dependencies]
+proptest = "1"
+
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(kani)'] }
