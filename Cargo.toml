@@ -2,6 +2,10 @@
 name = "pcx-rle"
 version = "0.1.0"
 edition = "2024"
+description = "PCX run-length codec with switchable bugs, the worked example for \"Eight ways to test a decoder\""
+keywords = ["pcx", "rle", "run-length", "testing", "fuzzing"]
+categories = ["compression", "encoding"]
+license = "CC0-1.0"
 
 [features]
 # The bugs, one at a time, for the article.

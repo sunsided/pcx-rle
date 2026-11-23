@@ -27,3 +27,9 @@ cargo mutants -- --lib                       # unit tests only
 
 Proptest under Miri needs `MIRIFLAGS=-Zmiri-disable-isolation`, since it
 looks for its regressions file.
+
+## License
+
+To the extent possible under law, the author has waived all copyright and
+related or neighboring rights to this example. See [LICENSE](LICENSE) for the
+CC0 1.0 Universal dedication.
