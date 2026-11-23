@@ -1,1 +1,4 @@
 /target
+
+# Failing inputs proptest records when a bug feature is on.
+*.proptest-regressions
