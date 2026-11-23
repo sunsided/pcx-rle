@@ -1,7 +1,7 @@
 # pcx-rle
 
 PCX run-length coding with four ways to get it wrong, for the article
-"Eight ways to test a decoder" on markusmayer.dev.
+["All tests pass"](https://markusmayer.dev/writing/all-tests-pass/) on markusmayer.dev.
 
 The codec is correct by default. Each of its bugs is a Cargo feature:
 
