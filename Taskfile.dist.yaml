@@ -1,0 +1,53 @@
+version: '3'
+
+# Each bug:* task runs the whole suite with one bug switched on, so the
+# failing tests show which techniques catch it. Narrow it with CLI_ARGS,
+# e.g. `task bug:cap -- --test runs`. A failing run is the expected outcome.
+
+tasks:
+  default:
+    cmds:
+      - task --list --sort=none
+    silent: true
+
+  test:
+    desc: Run the test suite against the correct codec
+    preconditions: &cargo
+      - sh: command -v cargo
+        msg: "cargo not found — install Rust from https://rustup.rs/"
+    cmds:
+      - cargo test {{.CLI_ARGS}}
+
+  bug:escape:
+    desc: "B1: run the tests with a literal of 0xC0 or more written bare"
+    cmds:
+      - task: bug:run
+        vars: {FEATURE: bug-escape}
+
+  bug:cap:
+    desc: "B2: run the tests with a run of 64 written as a count of zero"
+    cmds:
+      - task: bug:run
+        vars: {FEATURE: bug-cap}
+
+  bug:unchecked:
+    desc: "B3: run the tests with decode_fast reading past its input"
+    cmds:
+      - task: bug:run
+        vars: {FEATURE: bug-unchecked}
+
+  bug:article:
+    desc: "B4: run the ignored differential test against the article's decoder"
+    preconditions: *cargo
+    cmds:
+      - cargo test --test differential {{.CLI_ARGS}} -- --ignored
+
+  bug:run:
+    internal: true
+    requires:
+      vars:
+        - name: FEATURE
+          enum: [bug-escape, bug-cap, bug-unchecked]
+    preconditions: *cargo
+    cmds:
+      - cargo test --no-fail-fast --features {{.FEATURE}} {{.CLI_ARGS}}

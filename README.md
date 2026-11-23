@@ -25,6 +25,10 @@ cargo kani --features bug-escape --exact --harness proofs::round_trip_4 \
 cargo mutants -- --lib                       # unit tests only
 ```
 
+With [Task](https://taskfile.dev), `task bug:escape`, `task bug:cap`,
+`task bug:unchecked` and `task bug:article` run the suite against one bug
+each; extra arguments go after `--`, as in `task bug:cap -- --test runs`.
+
 Proptest under Miri needs `MIRIFLAGS=-Zmiri-disable-isolation`, since it
 looks for its regressions file.
 
